@@ -3,25 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>恒生科技走势分析</title>
+  <title>全球市场日报 H5</title>
   <style>
     :root {
       --bg: #0b1020;
       --card: rgba(18, 25, 48, 0.88);
-      --card-2: rgba(27, 36, 68, 0.9);
+      --card2: rgba(27, 36, 68, 0.95);
       --text: #eef2ff;
       --muted: #a7b0d6;
       --line: rgba(255,255,255,0.1);
       --green: #32d296;
-      --red: #ff6b6b;
-      --yellow: #ffd166;
       --blue: #72a8ff;
+      --yellow: #ffd166;
     }
-
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
       color: var(--text);
       background:
         radial-gradient(circle at top right, rgba(114,168,255,.22), transparent 28%),
@@ -30,21 +28,18 @@
       min-height: 100vh;
       padding: 18px 14px 32px;
     }
-
-    .wrap {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, rgba(114,168,255,.20), rgba(50,210,150,.10));
+    .wrap { max-width: 760px; margin: 0 auto; }
+    .hero, .card {
+      background: var(--card);
       border: 1px solid var(--line);
       border-radius: 24px;
-      padding: 22px 18px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 18px 50px rgba(0,0,0,.25);
+      padding: 20px 18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.22);
+      backdrop-filter: blur(12px);
     }
-
+    .hero {
+      background: linear-gradient(135deg, rgba(114,168,255,.20), rgba(50,210,150,.10));
+    }
     .tag {
       display: inline-block;
       font-size: 12px;
@@ -55,218 +50,96 @@
       margin-bottom: 12px;
       border: 1px solid rgba(255,255,255,0.08);
     }
-
-    h1 {
-      font-size: 28px;
-      line-height: 1.2;
-      margin: 0 0 10px;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 15px;
-      margin: 0;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
-
+    h1 { font-size: 30px; margin: 0 0 10px; }
+    h2 { font-size: 20px; margin: 0 0 12px; }
+    p { line-height: 1.72; color: #e7ebff; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px; }
     .metric {
-      background: var(--card);
+      background: rgba(14, 20, 39, 0.7);
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 14px;
     }
-
-    .label {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .value {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: .2px;
-    }
-
-    .up { color: var(--green); }
-    .down { color: var(--red); }
-    .neutral { color: var(--yellow); }
-
-    .section {
-      margin-top: 14px;
-      background: var(--card);
+    .metric .label { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .metric .value { font-size: 22px; font-weight: 700; }
+    .section { margin-top: 14px; }
+    .list { display: grid; gap: 10px; }
+    a.item {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      padding: 14px 14px;
       border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 18px 16px;
-      box-shadow: 0 12px 30px rgba(0,0,0,.14);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
     }
-
-    .section h2 {
-      margin: 0 0 12px;
-      font-size: 18px;
+    a.item:hover { background: rgba(255,255,255,0.07); }
+    .date { font-size: 15px; font-weight: 700; }
+    .desc { font-size: 13px; color: var(--muted); margin-top: 6px; }
+    .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .btn {
+      display: inline-block; text-decoration: none; color: #08111f; background: var(--yellow);
+      font-weight: 700; padding: 10px 14px; border-radius: 999px;
     }
-
-    .section p {
-      margin: 8px 0;
-      color: #e7ebff;
-      line-height: 1.72;
-      font-size: 15px;
-    }
-
-    .section ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .section li {
-      color: #e7ebff;
-      line-height: 1.72;
-      margin: 7px 0;
-      font-size: 15px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-left: 8px;
-      vertical-align: middle;
-    }
-
-    .badge-warn { background: rgba(255,209,102,.15); color: #ffd166; }
-    .badge-ok { background: rgba(50,210,150,.16); color: #7ff0c0; }
-    .badge-risk { background: rgba(255,107,107,.14); color: #ff9e9e; }
-
-    .quote {
-      margin-top: 14px;
-      padding: 16px;
-      border-radius: 18px;
-      background: var(--card-2);
-      border: 1px solid var(--line);
-      color: #f4f7ff;
-      line-height: 1.7;
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .footer {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-      text-align: center;
-      padding: 8px 10px 20px;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--line);
-      margin: 12px 0;
-    }
-
-    @media (max-width: 420px) {
-      h1 { font-size: 24px; }
-      .value { font-size: 22px; }
-      .grid { grid-template-columns: 1fr 1fr; }
-    }
+    .btn.secondary { background: var(--blue); color: white; }
+    .footer { margin-top: 16px; color: var(--muted); font-size: 12px; text-align: center; }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 26px; } }
   </style>
 </head>
 <body>
   <div class="wrap">
     <section class="hero">
-      <div class="tag">2026-03-28｜恒生科技指数 HSTECH</div>
-      <h1>恒生科技走势分析</h1>
-      <p class="subtitle">当前更像是<strong>下跌趋势中的弱反弹/筑底阶段</strong>，尚未出现明确的强势反转信号。策略上更适合 <strong>分批、慢买、控仓</strong>，不适合情绪化追涨。</p>
-
+      <div class="tag">GitHub Pages · 连续日报 · 可回看</div>
+      <h1>全球市场日报 H5</h1>
+      <p>这里会持续归档每日市场分析，覆盖：<strong>中概、恒生科技、纳斯达克、标普500、红利、日经、德国</strong>。每篇日报都优先基于<strong>前一日最新收盘数据</strong>生成。</p>
       <div class="grid">
-        <div class="metric">
-          <div class="label">最新收盘</div>
-          <div class="value">4778.01</div>
-        </div>
-        <div class="metric">
-          <div class="label">单日涨跌</div>
-          <div class="value up">+0.35%</div>
-        </div>
-        <div class="metric">
-          <div class="label">近1周</div>
-          <div class="value up">+1.39%</div>
-        </div>
-        <div class="metric">
-          <div class="label">近1个月</div>
-          <div class="value down">-4.24%</div>
-        </div>
-        <div class="metric">
-          <div class="label">近3个月</div>
-          <div class="value down">-14.35%</div>
-        </div>
-        <div class="metric">
-          <div class="label">年初至今</div>
-          <div class="value down">-16.71%</div>
-        </div>
+        <div class="metric"><div class="label">更新频率</div><div class="value">每天 09:00</div></div>
+        <div class="metric"><div class="label">阅读形式</div><div class="value">单文件 H5</div></div>
+        <div class="metric"><div class="label">访问方式</div><div class="value">网页直开</div></div>
+        <div class="metric"><div class="label">历史归档</div><div class="value">支持回看</div></div>
+      </div>
+      <div class="btns">
+        <a class="btn" id="latest-link" href="./reports/2026-03-28/">打开最新日报</a>
+        <a class="btn secondary" href="https://github.com/jinkaiqie-rgb/hstech-analysis-h5" target="_blank" rel="noopener">查看仓库</a>
       </div>
     </section>
 
-    <section class="section">
-      <h2>一眼结论 <span class="badge badge-warn">偏谨慎</span></h2>
-      <ul>
-        <li>指数距离年内高点约 <strong>-20.38%</strong>，中期趋势仍偏弱。</li>
-        <li>现价仍低于 <strong>10日 / 20日 / 60日 / 120日均线</strong>，说明反转尚未确认。</li>
-        <li>最近一周出现止跌反抽，但力度有限，更像技术性修复。</li>
-      </ul>
-      <div class="quote">一句话：能看、能跟踪、能小仓分批，但现阶段不宜重仓梭哈。</div>
+    <section class="section card">
+      <h2>日报归档</h2>
+      <p class="muted">最新在上。你可以像看博客一样回看之前每一天的分析。</p>
+      <div id="report-list" class="list"></div>
     </section>
 
-    <section class="section">
-      <h2>技术面怎么看</h2>
-      <p><strong>1）中期趋势偏弱</strong><br/>近3个月和近6个月跌幅都比较明显，表明市场主方向仍不是上行，而是调整。</p>
-      <p><strong>2）短线有承接，但没有转强</strong><br/>3月低点大约在 <strong>4657</strong> 一线，确实看到资金承接；不过指数还没有效收复关键均线和前高压力位。</p>
-      <p><strong>3）当前处于区间下部</strong><br/>近1个月大致运行在 <strong>4658—5232</strong>，现价还在这个区间偏下方，说明修复力度仍一般。</p>
-    </section>
-
-    <section class="section">
-      <h2>关键观察位</h2>
-      <ul>
-        <li><strong>支撑参考：</strong>4650 附近。若再度跌破，弱势可能延续。</li>
-        <li><strong>第一压力：</strong>5000 一带。站回去，市场情绪会改善。</li>
-        <li><strong>更强确认区：</strong>5000—5200。若放量站稳，反弹才更像反转。</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>投资建议</h2>
-      <p><strong>如果你看的是中长期：</strong></p>
-      <ul>
-        <li>可以开始关注和布局，但建议 <strong>分批建仓</strong>。</li>
-        <li>第一笔仓位建议只用计划总仓位的 <strong>1/4 到 1/3</strong>。</li>
-        <li>后续根据是否站稳 5000—5200 再考虑加仓，而不是看到反弹就追。</li>
-      </ul>
-      <div class="divider"></div>
-      <p><strong>不同风格对应做法：</strong></p>
-      <ul>
-        <li><span class="badge badge-ok">稳健型</span> 等趋势确认，再买得更安心。</li>
-        <li><span class="badge badge-warn">均衡型</span> 现在小仓试探，跌了再分批补。</li>
-        <li><span class="badge badge-risk">激进型</span> 可以博反弹，但必须设纪律，跌破关键位要收手。</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>最终判断</h2>
-      <div class="quote">现在的恒科，更适合“试探性定投/分批吸纳”，不适合“一把梭的趋势追击”。</div>
-    </section>
-
-    <div class="footer">
-      本页内容仅作市场分析与交流，不构成个性化投资建议。<br/>
-      市场有风险，投资需结合你的资金期限、风险承受能力和仓位纪律。
-    </div>
+    <div class="footer">说明：内容仅作市场分析交流，不构成个性化投资建议。</div>
   </div>
+
+  <script>
+    const fallback = [
+      { date: '2026-03-28', title: '恒生科技走势分析（首篇示例）', path: './reports/2026-03-28/' }
+    ];
+
+    function render(items) {
+      const list = document.getElementById('report-list');
+      if (!items || !items.length) items = fallback;
+      list.innerHTML = items.map(item => `
+        <a class="item" href="${item.path}">
+          <div class="date">${item.date} · ${item.title || '市场日报'}</div>
+          <div class="desc">${item.summary || '点击查看当天 H5 报告'}</div>
+        </a>
+      `).join('');
+      const latest = items[0];
+      if (latest) {
+        const link = document.getElementById('latest-link');
+        link.href = latest.path;
+        link.textContent = `打开最新日报（${latest.date}）`;
+      }
+    }
+
+    fetch('./reports/index.json?_=' + Date.now())
+      .then(r => r.ok ? r.json() : Promise.reject(new Error('no index')))
+      .then(data => render(data.reports || data))
+      .catch(() => render(fallback));
+  </script>
 </body>
 </html>
