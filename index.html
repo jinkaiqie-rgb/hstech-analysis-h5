@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>全球市场日报 H5</title>
+  <title>全球市场分析 H5</title>
   <style>
     :root {
       --bg: #0b1020;
@@ -73,56 +73,79 @@
 <body>
   <div class="wrap">
     <section class="hero">
-      <div class="tag">GitHub Pages · 连续日报 · 可回看</div>
-      <h1>全球市场日报 H5</h1>
-      <p>这里会持续归档每日市场分析，覆盖：<strong>中概、恒生科技、纳斯达克、标普500、红利、日经、德国</strong>。每篇日报都优先基于<strong>前一交易日最新收盘数据</strong>生成。</p>
+      <div class="tag">GitHub Pages · 日报 + 周报 · 移动端友好</div>
+      <h1>全球市场分析 H5</h1>
+      <p>持续归档<strong>市场日报</strong>与<strong>每周策略版</strong>，覆盖：<strong>中概、恒生科技、纳斯达克、标普500、红利、日经、德国</strong>。内容优先基于最新公开收盘数据整理。</p>
       <div class="grid">
-        <div class="metric"><div class="label">更新时间</div><div class="value">每天 09:00</div></div>
-        <div class="metric"><div class="label">阅读形式</div><div class="value">单文件 H5</div></div>
-        <div class="metric"><div class="label">访问方式</div><div class="value">网页直开</div></div>
-        <div class="metric"><div class="label">历史归档</div><div class="value">支持回看</div></div>
+        <div class="metric"><div class="label">内容形式</div><div class="value">单文件 H5</div></div>
+        <div class="metric"><div class="label">阅读场景</div><div class="value">微信直读</div></div>
+        <div class="metric"><div class="label">日报</div><div class="value">每天更新</div></div>
+        <div class="metric"><div class="label">周报</div><div class="value">每周策略版</div></div>
       </div>
       <div class="btns">
-        <a class="btn" id="latest-link" href="./reports/2026-03-30/">打开最新日报</a>
-        <a class="btn secondary" href="https://github.com/jinkaiqie-rgb/hstech-analysis-h5" target="_blank" rel="noopener">查看仓库</a>
+        <a class="btn" id="latest-weekly-link" href="./weekly/2026-03-30/">打开最新周报</a>
+        <a class="btn secondary" id="latest-daily-link" href="./reports/2026-03-30/">打开最新日报</a>
       </div>
     </section>
 
     <section class="section card">
-      <h2>日报归档</h2>
-      <p class="muted">最新在上。你可以像看博客一样回看之前每一天的分析。</p>
-      <div id="report-list" class="list"></div>
+      <h2>每周策略版</h2>
+      <p class="muted">更强调方向判断、机会风险与仓位思路。</p>
+      <div id="weekly-list" class="list"></div>
+    </section>
+
+    <section class="section card">
+      <h2>市场日报</h2>
+      <p class="muted">最新在上。适合快速看当日市场状态。</p>
+      <div id="daily-list" class="list"></div>
     </section>
 
     <div class="footer">说明：内容仅作市场分析交流，不构成个性化投资建议。</div>
   </div>
 
   <script>
-    const fallback = [
+    const fallbackWeekly = [
+      { date: '2026-03-30', title: '每周市场策略版：先防回撤，再等科技止跌', path: './weekly/2026-03-30/' }
+    ];
+    const fallbackDaily = [
       { date: '2026-03-30', title: '全球市场日报：风险偏好降温，红利最抗跌，科技与中概承压', path: './reports/2026-03-30/' }
     ];
 
-    function render(items) {
-      const list = document.getElementById('report-list');
+    function render(listId, items, fallback) {
+      const list = document.getElementById(listId);
       if (!items || !items.length) items = fallback;
       list.innerHTML = items.map(item => `
         <a class="item" href="${item.path}">
-          <div class="date">${item.date} · ${item.title || '市场日报'}</div>
-          <div class="desc">${item.summary || '点击查看当天 H5 报告'}</div>
+          <div class="date">${item.date} · ${item.title || '市场分析'}</div>
+          <div class="desc">${item.summary || '点击查看 H5 报告'}</div>
         </a>
       `).join('');
-      const latest = items[0];
-      if (latest) {
-        const link = document.getElementById('latest-link');
-        link.href = latest.path;
-        link.textContent = `打开最新日报（${latest.date}）`;
-      }
+      return items[0];
     }
 
+    fetch('./weekly/index.json?_=' + Date.now())
+      .then(r => r.ok ? r.json() : Promise.reject(new Error('no weekly index')))
+      .then(data => {
+        const latest = render('weekly-list', data.reports || data, fallbackWeekly);
+        if (latest) {
+          const link = document.getElementById('latest-weekly-link');
+          link.href = latest.path;
+          link.textContent = `打开最新周报（${latest.date}）`;
+        }
+      })
+      .catch(() => render('weekly-list', fallbackWeekly, fallbackWeekly));
+
     fetch('./reports/index.json?_=' + Date.now())
-      .then(r => r.ok ? r.json() : Promise.reject(new Error('no index')))
-      .then(data => render(data.reports || data))
-      .catch(() => render(fallback));
+      .then(r => r.ok ? r.json() : Promise.reject(new Error('no daily index')))
+      .then(data => {
+        const latest = render('daily-list', data.reports || data, fallbackDaily);
+        if (latest) {
+          const link = document.getElementById('latest-daily-link');
+          link.href = latest.path;
+          link.textContent = `打开最新日报（${latest.date}）`;
+        }
+      })
+      .catch(() => render('daily-list', fallbackDaily, fallbackDaily));
   </script>
 </body>
 </html>
