@@ -6,67 +6,23 @@
   <title>全球市场分析 H5</title>
   <style>
     :root {
-      --bg: #0b1020;
-      --card: rgba(18, 25, 48, 0.88);
-      --card2: rgba(27, 36, 68, 0.95);
-      --text: #eef2ff;
-      --muted: #a7b0d6;
-      --line: rgba(255,255,255,0.1);
-      --green: #32d296;
-      --blue: #72a8ff;
-      --yellow: #ffd166;
+      --bg: #0b1020; --card: rgba(18, 25, 48, 0.88); --card2: rgba(27, 36, 68, 0.95);
+      --text: #eef2ff; --muted: #a7b0d6; --line: rgba(255,255,255,0.1); --green: #32d296; --blue: #72a8ff; --yellow: #ffd166;
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top right, rgba(114,168,255,.22), transparent 28%),
-        radial-gradient(circle at top left, rgba(50,210,150,.18), transparent 25%),
-        linear-gradient(180deg, #0b1020 0%, #101933 100%);
-      min-height: 100vh;
-      padding: 18px 14px 32px;
-    }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; color: var(--text); background: radial-gradient(circle at top right, rgba(114,168,255,.22), transparent 28%), radial-gradient(circle at top left, rgba(50,210,150,.18), transparent 25%), linear-gradient(180deg, #0b1020 0%, #101933 100%); min-height: 100vh; padding: 18px 14px 32px; }
     .wrap { max-width: 760px; margin: 0 auto; }
-    .hero, .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 20px 18px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.22);
-      backdrop-filter: blur(12px);
-    }
+    .hero, .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 20px 18px; box-shadow: 0 18px 50px rgba(0,0,0,.22); backdrop-filter: blur(12px); }
     .hero { background: linear-gradient(135deg, rgba(114,168,255,.20), rgba(50,210,150,.10)); }
-    .tag {
-      display: inline-block; font-size: 12px; padding: 6px 10px; border-radius: 999px;
-      background: rgba(255,255,255,0.08); color: #d7e2ff; margin-bottom: 12px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    h1 { font-size: 30px; margin: 0 0 10px; }
-    h2 { font-size: 20px; margin: 0 0 12px; }
-    p { line-height: 1.72; color: #e7ebff; }
-    .muted { color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px; }
-    .metric { background: rgba(14, 20, 39, 0.7); border: 1px solid var(--line); border-radius: 18px; padding: 14px; }
-    .metric .label { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
-    .metric .value { font-size: 22px; font-weight: 700; }
-    .section { margin-top: 14px; }
-    .list { display: grid; gap: 10px; }
-    a.item {
-      display: block; text-decoration: none; color: var(--text); padding: 14px 14px;
-      border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,0.04);
-    }
-    a.item:hover { background: rgba(255,255,255,0.07); }
-    .date { font-size: 15px; font-weight: 700; }
-    .desc { font-size: 13px; color: var(--muted); margin-top: 6px; }
-    .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-    .btn {
-      display: inline-block; text-decoration: none; color: #08111f; background: var(--yellow);
-      font-weight: 700; padding: 10px 14px; border-radius: 999px;
-    }
-    .btn.secondary { background: var(--blue); color: white; }
-    .footer { margin-top: 16px; color: var(--muted); font-size: 12px; text-align: center; }
+    .tag { display: inline-block; font-size: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #d7e2ff; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08); }
+    h1 { font-size: 30px; margin: 0 0 10px; } h2 { font-size: 20px; margin: 0 0 12px; } p { line-height: 1.72; color: #e7ebff; }
+    .muted { color: var(--muted); } .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px; }
+    .metric { background: rgba(14, 20, 39, 0.7); border: 1px solid var(--line); border-radius: 18px; padding: 14px; } .metric .label { font-size: 12px; color: var(--muted); margin-bottom: 8px; } .metric .value { font-size: 22px; font-weight: 700; }
+    .section { margin-top: 14px; } .list { display: grid; gap: 10px; }
+    a.item { display: block; text-decoration: none; color: var(--text); padding: 14px 14px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,0.04); }
+    a.item:hover { background: rgba(255,255,255,0.07); } .date { font-size: 15px; font-weight: 700; } .desc { font-size: 13px; color: var(--muted); margin-top: 6px; }
+    .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; } .btn { display: inline-block; text-decoration: none; color: #08111f; background: var(--yellow); font-weight: 700; padding: 10px 14px; border-radius: 999px; }
+    .btn.secondary { background: var(--blue); color: white; } .footer { margin-top: 16px; color: var(--muted); font-size: 12px; text-align: center; }
     @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 26px; } }
   </style>
 </head>
@@ -84,33 +40,28 @@
       </div>
       <div class="btns">
         <a class="btn" id="latest-weekly-link" href="./weekly/2026-03-30/">打开最新周报</a>
-        <a class="btn secondary" id="latest-daily-link" href="./reports/2026-03-30/">打开最新日报</a>
+        <a class="btn secondary" id="latest-daily-link" href="./reports/2026-03-31/">打开最新日报</a>
       </div>
     </section>
-
     <section class="section card">
       <h2>每周策略版</h2>
       <p class="muted">更强调方向判断、机会风险与仓位思路。</p>
       <div id="weekly-list" class="list"></div>
     </section>
-
     <section class="section card">
       <h2>市场日报</h2>
       <p class="muted">最新在上。适合快速看当日市场状态。</p>
       <div id="daily-list" class="list"></div>
     </section>
-
     <div class="footer">说明：内容仅作市场分析交流，不构成个性化投资建议。</div>
   </div>
-
   <script>
     const fallbackWeekly = [
       { date: '2026-03-30', title: '每周市场策略版：先防回撤，再等科技止跌', path: './weekly/2026-03-30/' }
     ];
     const fallbackDaily = [
-      { date: '2026-03-30', title: '全球市场日报：风险偏好降温，红利最抗跌，科技与中概承压', path: './reports/2026-03-30/' }
+      { date: '2026-03-31', title: '全球市场日报：防守继续占优，红利最稳，科技与中概仍偏弱', summary: '基于 2026-03-30 收盘/收市后公开数据：红利与德国相对更强，纳指和中概偏弱，恒生科技暂时止跌但仍未确认反转。', path: './reports/2026-03-31/' }
     ];
-
     function render(listId, items, fallback) {
       const list = document.getElementById(listId);
       if (!items || !items.length) items = fallback;
@@ -122,28 +73,18 @@
       `).join('');
       return items[0];
     }
-
     fetch('./weekly/index.json?_=' + Date.now())
       .then(r => r.ok ? r.json() : Promise.reject(new Error('no weekly index')))
       .then(data => {
         const latest = render('weekly-list', data.reports || data, fallbackWeekly);
-        if (latest) {
-          const link = document.getElementById('latest-weekly-link');
-          link.href = latest.path;
-          link.textContent = `打开最新周报（${latest.date}）`;
-        }
+        if (latest) { const link = document.getElementById('latest-weekly-link'); link.href = latest.path; link.textContent = `打开最新周报（${latest.date}）`; }
       })
       .catch(() => render('weekly-list', fallbackWeekly, fallbackWeekly));
-
     fetch('./reports/index.json?_=' + Date.now())
       .then(r => r.ok ? r.json() : Promise.reject(new Error('no daily index')))
       .then(data => {
         const latest = render('daily-list', data.reports || data, fallbackDaily);
-        if (latest) {
-          const link = document.getElementById('latest-daily-link');
-          link.href = latest.path;
-          link.textContent = `打开最新日报（${latest.date}）`;
-        }
+        if (latest) { const link = document.getElementById('latest-daily-link'); link.href = latest.path; link.textContent = `打开最新日报（${latest.date}）`; }
       })
       .catch(() => render('daily-list', fallbackDaily, fallbackDaily));
   </script>
