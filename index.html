@@ -40,7 +40,7 @@
       </div>
       <div class="btns">
         <a class="btn" id="latest-weekly-link" href="./weekly/2026-03-30/">打开最新周报</a>
-        <a class="btn secondary" id="latest-daily-link" href="./reports/2026-04-02/">打开最新日报</a>
+        <a class="btn secondary" id="latest-daily-link" href="./reports/2026-04-03/">打开最新日报</a>
       </div>
     </section>
     <section class="section card">
@@ -60,7 +60,7 @@
       { date: '2026-03-30', title: '每周市场策略版：先防回撤，再等科技止跌', path: './weekly/2026-03-30/' }
     ];
     const fallbackDaily = [
-      { date: '2026-04-02', title: '全球市场日报：欧洲最强、美股延续修复，中概回吐，恒科仍待确认', summary: '基于 2026-04-01 收盘/收市后公开数据：德国 DAX 最强，纳指与标普继续修复；中概与红利小幅回落，恒生科技仅能确认收盘点位，无法确认精确单日涨跌幅。', path: './reports/2026-04-02/' }
+      { date: '2026-04-03', title: '全球市场日报：美股韧性仍在，亚洲偏弱，日经早盘出现修复', summary: '基于 2026-04-02 收盘/收市后公开数据：纳指、SCHD 与标普小幅领先，DAX 转弱，中概、恒生科技代理与日经承压；今日日经早盘有技术性修复。', path: './reports/2026-04-03/' }
     ];
     function render(listId, items, fallback) {
       const list = document.getElementById(listId);
@@ -84,7 +84,7 @@
       .then(r => r.ok ? r.json() : Promise.reject(new Error('no daily index')))
       .then(data => {
         const latest = render('daily-list', data.reports || data, fallbackDaily);
-        if (latest) { const link = document.getElementById('latest-daily-link'); link.href = latest.path; link.textContent = `打开最新日报（${latest.date}）`; }
+        if (latest) { const link = document.getElementById('latest-daily-link'); link.href = latest.path; link.textContent = `打开最新日报（2026-04-03）`; }
       })
       .catch(() => render('daily-list', fallbackDaily, fallbackDaily));
   </script>
