@@ -40,7 +40,7 @@
       </div>
       <div class="btns">
         <a class="btn" id="latest-weekly-link" href="./weekly/2026-04-06/">打开最新周报</a>
-        <a class="btn secondary" id="latest-daily-link" href="./reports/2026-04-06/">打开最新日报</a>
+        <a class="btn secondary" id="latest-daily-link" href="./reports/2026-04-07/">打开最新日报（2026-04-07）</a>
       </div>
     </section>
     <section class="section card">
@@ -57,10 +57,10 @@
   </div>
   <script>
     const fallbackWeekly = [
-      { date: '2026-03-30', title: '每周市场策略版：先防回撤，再等科技止跌', path: './weekly/2026-04-06/' }
+      { date: '2026-04-06', title: '每周市场策略版：先防回撤，再等科技止跌', path: './weekly/2026-04-06/' }
     ];
     const fallbackDaily = [
-      { date: '2026-04-06', title: '全球市场日报：假期让美欧港停在 4/2，日经 4/3 独自修复', summary: '基于各市场最近一个交易日的公开收盘数据：美股与红利小幅走强，日经在 4/3 明显修复；中概、恒生科技与德国市场仍偏弱。因 4/3 为美股、港股与德国市场假期，这些方向最新收盘继续采用 4/2。26-04-06/' }
+      { date: '2026-04-07', title: '全球市场日报：美股主线续强，中概跟涨；恒科与德国现货确认度仍偏弱', summary: '美股主线继续偏强，纳指/标普/红利都在 4/6 收红；中概同步修复，但恒生科技与德国现货指数的最新可确认收盘仍停在 4/2。', path: './reports/2026-04-07/' }
     ];
     function render(listId, items, fallback) {
       const list = document.getElementById(listId);
@@ -77,14 +77,22 @@
       .then(r => r.ok ? r.json() : Promise.reject(new Error('no weekly index')))
       .then(data => {
         const latest = render('weekly-list', data.reports || data, fallbackWeekly);
-        if (latest) { const link = document.getElementById('latest-weekly-link'); link.href = latest.path; link.textContent = `打开最新周报（${latest.date}）`; }
+        if (latest) {
+          const link = document.getElementById('latest-weekly-link');
+          link.href = latest.path;
+          link.textContent = `打开最新周报（${latest.date}）`;
+        }
       })
       .catch(() => render('weekly-list', fallbackWeekly, fallbackWeekly));
     fetch('./reports/index.json?_=' + Date.now())
       .then(r => r.ok ? r.json() : Promise.reject(new Error('no daily index')))
       .then(data => {
         const latest = render('daily-list', data.reports || data, fallbackDaily);
-        if (latest) { const link = document.getElementById('latest-daily-link'); link.href = latest.path; link.textContent = `打开最新日报（2026-04-03）`; }
+        if (latest) {
+          const link = document.getElementById('latest-daily-link');
+          link.href = latest.path;
+          link.textContent = `打开最新日报（${latest.date}）`;
+        }
       })
       .catch(() => render('daily-list', fallbackDaily, fallbackDaily));
   </script>
