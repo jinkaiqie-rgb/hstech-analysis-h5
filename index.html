@@ -40,7 +40,7 @@
       </div>
       <div class="btns">
         <a class="btn" id="latest-weekly-link" href="./weekly/2026-04-06/">打开最新周报</a>
-        <a class="btn secondary" id="latest-daily-link" href="./reports/2026-04-07/">打开最新日报（2026-04-07）</a>
+        <a class="btn secondary" id="latest-daily-link" href="./reports/2026-04-08/">打开最新日报（2026-04-08）</a>
       </div>
     </section>
     <section class="section card">
@@ -60,13 +60,19 @@
       { date: '2026-04-06', title: '每周市场策略版：先防回撤，再等科技止跌', path: './weekly/2026-04-06/' }
     ];
     const fallbackDaily = [
-      { date: '2026-04-07', title: '全球市场日报：美股主线续强，中概跟涨；恒科与德国现货确认度仍偏弱', summary: '美股主线继续偏强，纳指/标普/红利都在 4/6 收红；中概同步修复，但恒生科技与德国现货指数的最新可确认收盘仍停在 4/2。', path: './reports/2026-04-07/' }
+      { date: '2026-04-08', title: '全球市场日报：美股韧性仍在，红利守稳；港股科技数据滞后，日经今早大反弹', summary: '美股主线继续偏强，纳指/标普小幅收红；中证红利走稳。中概仍在修复区，德国回落，恒生科技因港股假期最新可确认收盘仍为 4/2，短线不宜过度乐观。今早日经盘中反弹约 4.8%。', path: './reports/2026-04-08/' }
     ];
+    function normalizePath(listId, path) {
+      if (!path) return '#';
+      if (/^(https?:)?\/\//.test(path) || path.startsWith('/')) return path;
+      if (listId === 'daily-list' && !path.startsWith('./reports/')) return './reports/' + path.replace(/^\.\//, '');
+      return path;
+    }
     function render(listId, items, fallback) {
       const list = document.getElementById(listId);
       if (!items || !items.length) items = fallback;
       list.innerHTML = items.map(item => `
-        <a class="item" href="${item.path}">
+        <a class="item" href="${normalizePath(listId, item.path)}">
           <div class="date">${item.date} · ${item.title || '市场分析'}</div>
           <div class="desc">${item.summary || '点击查看 H5 报告'}</div>
         </a>
@@ -79,7 +85,7 @@
         const latest = render('weekly-list', data.reports || data, fallbackWeekly);
         if (latest) {
           const link = document.getElementById('latest-weekly-link');
-          link.href = latest.path;
+          link.href = normalizePath('weekly-list', latest.path);
           link.textContent = `打开最新周报（${latest.date}）`;
         }
       })
@@ -90,7 +96,7 @@
         const latest = render('daily-list', data.reports || data, fallbackDaily);
         if (latest) {
           const link = document.getElementById('latest-daily-link');
-          link.href = latest.path;
+          link.href = normalizePath('daily-list', latest.path);
           link.textContent = `打开最新日报（${latest.date}）`;
         }
       })
